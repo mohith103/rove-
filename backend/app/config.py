@@ -12,9 +12,14 @@ class BackendConfig(BaseModel):
     host: str = "127.0.0.1"
     port: int = 8000
     cors_origins: list[str] = Field(default_factory=lambda: [
-        "http://localhost:5173",   # Vite dev server
-        "http://localhost:3000",   # CRA fallback
+        # Local development
+        "http://localhost:5173",
+        "http://localhost:3000",
         "http://127.0.0.1:5173",
+        # Local network (for iOS / tablet testing)
+        # Replace 192.168.1.42 with YOUR Mac's IP
+        "http://192.168.1.42:5173",
+        "http://192.168.1.42:8000",
     ])
     # How often to broadcast state over WebSocket (seconds)
     stream_interval: float = 0.5
