@@ -1,0 +1,115 @@
+# ROVE — Rover Operations & Viability Engine
+# All simulation parameters live here.
+
+map:
+  width: 20
+  height: 20
+  seed: 42
+
+terrain:
+  plain: 0.55
+  rock: 0.15
+  crater: 0.10
+  mountain: 0.05
+  sand: 0.15
+
+movement_cost:
+  plain: 1.0
+  rock: 2.0
+  crater: 2.5
+  mountain: 3.5
+  sand: 1.5
+
+rover:
+  initial_energy: 100.0
+  initial_water: 80.0
+  initial_oxygen: 90.0
+  initial_food: 100.0
+  initial_battery_health: 100.0
+  initial_rover_health: 100.0
+  cargo_capacity: 5
+
+consumption:
+  per_move: 1.0
+  per_collect: 3.0
+  per_analyze: 5.0
+  per_communicate: 1.0
+  per_wait: 0.2
+  water_per_tick: 0.05
+  oxygen_per_tick: 0.03
+  food_per_tick: 0.02
+  battery_degradation_per_tick: 0.02
+  rover_health_degradation_per_tick: 0.01
+
+
+base:
+  x: 0
+  y: 0
+  recharge_rate: 10.0
+
+science:
+  num_sites: 5
+  min_value: 50
+  max_value: 200
+  min_difficulty: 1
+  max_difficulty: 5
+
+mission:
+  max_steps: 200
+  success_samples_required: 3
+
+reward:
+  per_step_penalty: -0.05
+  move_penalty: -0.1
+  blocked_move_penalty: -0.5
+  collect_base_reward: 100.0
+  collect_value_multiplier: 0.5
+  analyze_reward: 5.0
+  return_to_base_reward: 0.0
+  recharge_reward: 0.0
+  repair_reward: 0.0
+  invalid_action_penalty: -1.0
+  mission_success_reward: 500.0
+  mission_failure_penalty: -1000.0
+
+training:
+  timesteps: 200000
+  seed: 42
+  n_envs: 4
+  learning_rate: 0.0003
+  n_steps: 1024
+  batch_size: 64
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.01
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  net_arch: [64, 64]
+  eval_episodes: 20
+  eval_freq: 10000
+  save_freq: 50000
+
+weather:
+  change_probability: 0.02
+  probabilities:
+    clear: 0.55
+    dusty: 0.20
+    dust_storm: 0.15
+    cold_snap: 0.07
+    extreme_cold: 0.03
+  duration:
+    clear: [1, 5]
+    moderate: [5, 15]
+    severe: [10, 25]
+
+events:
+  base_probability: 0.01
+  probabilities:
+    solar_panel_failure: 0.15
+    wheel_failure: 0.20
+    battery_degradation: 0.10
+    communication_loss: 0.15
+    navigation_sensor_failure: 0.10
+    water_leak: 0.15
+    rover_overheating: 0.15

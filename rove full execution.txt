@@ -1,0 +1,285 @@
+🚀 ROVE — Complete Project Run Guide
+Copy this entire message into a file called RUNNING.md in your project root.
+
+
+📋 WHAT THIS PROJECT IS
+ROVE is a Mars rover simulation with an AI agent (PPO) that decides what the rover does. It has:
+
+A simulation (Python): Mars terrain, rover, weather, events
+An AI (PyTorch + Stable-Baselines3): trained PPO agent
+A backend (FastAPI): serves the simulation over HTTP + WebSockets
+A frontend (React): visual dashboard to watch missions live
+
+🏗️ PROJECT LAYOUT
+text
+~/Desktop/rove/
+├── simulation/ # Mars world
+├── agents/ # Random + Rule-based agents
+├── reinforcement_learning/ # Gymnasium env + PPO training
+├── experiments/ # Evaluation scripts
+├── configs/ # YAML configs (difficulties)
+├── tests/ # pytest tests
+├── backend/ # FastAPI server
+├── frontend/ # React UI
+├── demo.py # Terminal visual demo
+├── requirements.txt # Python dependencies
+└── README.md
+
+🛠️ FIRST-TIME SETUP (Only Do Once)
+1. Go to the project
+bash
+cd ~/Desktop/rove
+Opens your project folder.
+
+2. Create a Python virtual environment
+bash
+python3 -m venv .venv
+Creates an isolated Python folder called .venv.
+
+3. Activate the virtual environment
+bash
+source .venv/bin/activate
+Turns on the isolated environment. Your terminal prompt will now show (.venv).
+
+4. Install Python packages
+bash
+pip install -r requirements.txt
+Installs numpy, pandas, pydantic, gymnasium, torch, stable-baselines3, fastapi, uvicorn, etc.
+
+5. Install frontend dependencies
+bash
+cd ~/Desktop/rove/frontend
+npm install
+cd ~/Desktop/rove
+Installs React, Vite, Tailwind, Recharts (~200 MB into node_modules/).
+
+That's it. Setup done.
+
+
+✅ VERIFY EVERYTHING WORKS
+6. Run all tests
+bash
+pytest -v
+You should see ~20+ tests pass. If any fail, something is broken — fix before continuing.
+
+7. Run a terminal demo (optional)
+bash
+python demo.py
+Shows the rover moving around Mars in ASCII art in your terminal.
+
+8. Evaluate the AI agents (optional)
+bash
+python -m reinforcement_learning.evaluate --episodes 10
+Runs 10 missions each for Random, Rule-Based, and PPO. Prints a comparison table.
+
+
+🎮 TRAINING THE AI (Only If You Want to Retrain)
+9. Train PPO
+bash
+python -m reinforcement_learning.train --timesteps 50000 --difficulty medium
+Trains for 50,000 simulation steps (~5–10 minutes). Saves the model to reinforcement_learning/models/ppo_rove.zip.
+
+Use --difficulty easy|medium|hard|extreme for different environments.
+
+Use --timesteps 200000 for a longer, better run (~30 min).
+
+
+🌐 RUNNING THE FULL WEB APP
+You need two terminals running simultaneously.
+
+10. Open Terminal 1 (backend)
+bash
+cd ~/Desktop/rove
+source .venv/bin/activate
+uvicorn backend.app.main:app --reload --port 8000
+Starts the FastAPI server at http://localhost:8000.
+
+Verify it's working: open http://localhost:8000/docs in your browser. You should see the interactive API docs.
+
+Leave this terminal running.
+
+11. Open Terminal 2 (frontend)
+In VS Code: press Cmd + T to open a new terminal tab, or click the + in the terminal panel.
+
+bash
+cd ~/Desktop/rove/frontend
+npm run dev
+Starts the React dev server. You'll see output like:
+
+text
+VITE v5.x.x ready in 300 ms
+➜ Local: http://localhost:5173/
+Leave this terminal running too.
+
+12. Open the app
+Open your browser and go to:
+
+text
+http://localhost:5173
+You should see the ROVE mission control dashboard. Click "New Mission" to start watching the AI.
+
+
+🛑 STOPPING THE PROJECT
+13. Stop the servers
+In each running terminal (backend and frontend), press:
+
+text
+Ctrl + C
+Stops that server.
+
+14. Deactivate the Python environment
+In the backend terminal:
+
+bash
+deactivate
+Turns off the virtual environment.
+
+Close the terminals or VS Code entirely when done.
+
+
+🔁 DAILY WORKFLOW (After First Setup)
+Once everything is installed, your workflow is just:
+
+bash
+# Terminal 1 — Backend
+cd ~/Desktop/rove
+source .venv/bin/activate
+uvicorn backend.app.main:app --reload
+
+# Terminal 2 — Frontend
+cd ~/Desktop/rove/frontend
+npm run dev
+
+# Browser
+open http://localhost:5173
+That's it. Three things running: backend, frontend, browser.
+
+
+🧪 QUICK COMMANDS REFERENCE
+ 
+What you want
+Command
+Go to project
+cd ~/Desktop/rove
+Activate Python env
+source .venv/bin/activate
+Run all tests
+pytest -v
+Visual terminal demo
+python demo.py
+Evaluate AI
+python -m reinforcement_learning.evaluate --episodes 10
+Train AI
+python -m reinforcement_learning.train --timesteps 50000
+Start backend
+uvicorn backend.app.main:app --reload --port 8000
+Start frontend
+cd frontend && npm run dev
+Stop a running server
+Ctrl + C
+Turn off Python env
+deactivate
+
+🐛 TROUBLESHOOTING
+ 
+Problem
+Fix
+command not found: python
+Forgot source .venv/bin/activate
+ModuleNotFoundError
+Same — activate the venv
+Address already in use
+Something's already on port 8000 or 5173. Kill it: lsof -ti:8000 | xargs kill -9
+npm: command not found
+Install Node.js: brew install node
+uvicorn: command not found
+pip install uvicorn inside the venv
+Backend says "no such file"
+Make sure you're in ~/Desktop/rove, not a subfolder
+Frontend shows blank page
+Backend isn't running — check Terminal 1
+EADDRINUSE on frontend
+Another Vite is running: lsof -ti:5173 | xargs kill -9
+frontend/ folder is broken
+Delete and re-scaffold: rm -rf frontend && npm create vite@latest frontend -- --template react-ts
+
+🎯 THE 3 COMMANDS YOU'LL USE 90% OF THE TIME
+bash
+cd ~/Desktop/rove && source .venv/bin/activate
+→ Start every session with this.
+
+bash
+pytest -v
+→ Quick sanity check that nothing is broken.
+
+bash
+python -m reinforcement_learning.evaluate --episodes 10
+→ See how the AI is performing.
+
+
+📌 PORTS SUMMARY
+ 
+Service
+Port
+URL
+FastAPI backend
+8000
+http://localhost:8000
+FastAPI docs
+8000
+http://localhost:8000/docs
+React frontend
+5173
+http://localhost:5173
+TensorBoard (optional)
+6006
+http://localhost:6006
+To view training curves in TensorBoard:
+
+bash
+tensorboard --logdir reinforcement_learning/logs/tensorboard
+Then open http://localhost:6006.
+
+
+🗂️ WHERE THINGS GET SAVED
+ 
+Output
+Location
+Trained PPO models
+reinforcement_learning/models/ppo_rove.zip
+Best model snapshot
+reinforcement_learning/models/best/best_model.zip
+TensorBoard logs
+reinforcement_learning/logs/tensorboard/
+Evaluation CSVs
+experiments/results/*.csv
+Config files
+configs/*.yaml
+
+🚨 IF YOU BREAK SOMETHING
+Roll back to a working state:
+
+bash
+cd ~/Desktop/rove
+git status
+git diff # see what changed
+git checkout -- . # discard all local changes (DANGER: loses work)
+If you haven't set up git yet:
+
+bash
+cd ~/Desktop/rove
+git init
+git add .
+git commit -m "Working snapshot"
+Do this once you've verified everything works. Then you always have a safe point to return to.
+
+
+🎓 WHAT TO SHOW PEOPLE
+When someone asks "what did you build?":
+
+Open http://localhost:5173
+Click New Mission → choose difficulty → choose PPO agent
+Watch the rover explore Mars in real time
+Show the AI decision panel (it explains its reasoning)
+Show the analytics page after the mission ends
+That 30-second demo is the whole pitch.

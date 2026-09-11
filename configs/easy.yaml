@@ -1,0 +1,31 @@
+# Include default and override
+defaults:
+  - default
+
+mission:
+  max_steps: 250
+  success_samples_required: 3
+
+weather:
+  change_probability: 0.01
+  probabilities:
+    clear: 0.75
+    dusty: 0.20
+    dust_storm: 0.04
+    cold_snap: 0.01
+    extreme_cold: 0.00
+  duration:
+    clear: [1, 5]
+    moderate: [5, 10]
+    severe: [5, 10]
+
+events:
+  base_probability: 0.003
+  probabilities:
+    solar_panel_failure: 0.10
+    wheel_failure: 0.15
+    battery_degradation: 0.05
+    communication_loss: 0.20
+    navigation_sensor_failure: 0.10
+    water_leak: 0.20
+    rover_overheating: 0.20

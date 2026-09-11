@@ -1,0 +1,42 @@
+🎯 Two Terminals. Two Commands.
+
+Terminal 1 — Backend
+bash
+cd ~/Desktop/rove && source .venv/bin/activate && uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+
+Terminal 2 — Frontend
+bash
+cd ~/Desktop/rove/frontend && npm run dev
+
+Then Open in Browser
+text
+http://localhost:5173
+
+🛑 To Stop Everything
+bash
+pkill -f uvicorn && pkill -f vite
+
+🔍 Quick Health Check (Optional)
+bash
+curl http://127.0.0.1:8000/health
+Expected: {"status":"ok","version":"0.1.0"}
+
+
+📋 Cheat Sheet
+ 
+Task
+Command
+Start backend
+cd ~/Desktop/rove && source .venv/bin/activate && uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+Start frontend
+cd ~/Desktop/rove/frontend && npm run dev
+Kill both
+pkill -f uvicorn && pkill -f vite
+Backend health
+curl http://127.0.0.1:8000/health
+Dashboard
+http://localhost:5173
+API docs
+http://127.0.0.1:8000/docs
+
+That's it. Two terminals, two commands, one browser tab. You're running ROVE.

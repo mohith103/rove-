@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Models & logs
+reinforcement_learning/models/*.zip
+reinforcement_learning/models/best/
+reinforcement_learning/models/checkpoints/
+reinforcement_learning/logs/
+experiments/results/*.csv
+experiments/plots/*.png
+
+# Keep placeholder files
+!reinforcement_learning/models/.gitkeep
+!reinforcement_learning/logs/.gitkeep
+!experiments/results/.gitkeep
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.local
+
+# Env
+.env
+.env.local
+.env.*.local
+!.env.production
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log

@@ -1,0 +1,30 @@
+defaults:
+  - default
+
+mission:
+  max_steps: 120
+  success_samples_required: 3
+
+weather:
+  change_probability: 0.07
+  probabilities:
+    clear: 0.20
+    dusty: 0.20
+    dust_storm: 0.35
+    cold_snap: 0.15
+    extreme_cold: 0.10
+  duration:
+    clear: [1, 3]
+    moderate: [5, 15]
+    severe: [20, 40]
+
+events:
+  base_probability: 0.04
+  probabilities:
+    solar_panel_failure: 0.20
+    wheel_failure: 0.20
+    battery_degradation: 0.15
+    communication_loss: 0.10
+    navigation_sensor_failure: 0.10
+    water_leak: 0.10
+    rover_overheating: 0.15

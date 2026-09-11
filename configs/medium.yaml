@@ -1,0 +1,4 @@
+# Medium = alias for default. Kept for a symmetric CLI:
+#   --difficulty {easy, medium, hard, extreme}
+defaults:
+  - default

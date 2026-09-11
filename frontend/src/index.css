@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/* ROVE global styles */
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background-color: #0a0e14;
+  color: #e6edf3;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Monospace for numbers and IDs */
+.mono {
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #11151c;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3240;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a4557;
+}
