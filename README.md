@@ -12,8 +12,6 @@ Built on a **deterministic simulation core** (seeded NumPy generators ensure byt
 
 > **Research / educational simulation.** Not affiliated with NASA. This is a portfolio-grade demonstration of reinforcement learning, multi-agent systems, explainable AI, and full-stack engineering — not flight software.
 
-> **Research / educational simulation.** Not affiliated with NASA.
-
 ---
 
 ## Table of Contents
