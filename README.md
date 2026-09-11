@@ -1,6 +1,16 @@
-# ROVE — Autonomous Mars Mission Commander
+# ROVE — Multi-Agent Mars Rover Simulation & Research Platform
 
-A full-stack AI simulation where an autonomous rover commander plans missions on a Mars grid, collects geological samples, manages limited resources, and reasons about alternatives — all while streaming live data to a mission-control dashboard.
+**A full-stack AI research platform for autonomous rover decision-making.**
+
+ROVE is a Mars rover simulation in which an autonomous AI commander navigates a 20×20 terrain grid, collects scientific samples, manages limited resources (energy, oxygen, water, food, battery, health), and returns safely to base while dealing with dynamic weather and random equipment failures.
+
+The project ships with **four distinct AI architectures** — Random, Rule-Based, PPO (reinforcement learning), and a Multi-Agent Committee of four specialists — all sharing a common `act(state) -> int` interface, enabling direct comparison on real, reproducible metrics.
+
+Beyond the live simulation, ROVE includes a **complete research platform**: mission replay with frame-by-frame scrubbing, analytics dashboards, counterfactual analysis ("what if the rover had returned earlier?"), automatic failure analysis, and a batch experiment lab for agent benchmarking.
+
+Built on a **deterministic simulation core** (seeded NumPy generators ensure byte-identical results for the same seed), the system streams live state updates over WebSockets to a React + TypeScript mission-control dashboard. The backend is FastAPI; the frontend uses Vite, Tailwind CSS v4, and Recharts. Reinforcement learning uses PyTorch and Stable-Baselines3 with a Gymnasium-compatible environment.
+
+> **Research / educational simulation.** Not affiliated with NASA. This is a portfolio-grade demonstration of reinforcement learning, multi-agent systems, explainable AI, and full-stack engineering — not flight software.
 
 > **Research / educational simulation.** Not affiliated with NASA.
 
